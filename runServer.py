@@ -49,8 +49,7 @@ img {
     <!--<script src="http://luis-almeida.github.io/unveil/jquery.unveil.min.js" charset="utf-8"></script>-->
     <script>
 $(document).ready(function() {
-    console.log("Request new images");
-
+    //console.log("Request new images");
     var images = []
 
     function requestNewImages(){
@@ -59,12 +58,7 @@ $(document).ready(function() {
             url: '/reloadImgs',
             type: 'POST',
             success: function(response) {
-                console.log("Received : "+response);
-
-
-
-                //console.log(arr_diff(['a', 'b'], ['a', 'b', 'c', 'd']));
-
+                //console.log("Received : "+response);
                 obj = JSON.parse(response);
 
                 if(images.length == 0){
@@ -75,26 +69,19 @@ $(document).ready(function() {
 
                 }else{
                     var tempImages = compareJSON(images,obj.images);
-                    console.log(tempImages);
+                    //console.log(tempImages);
                     if(tempImages.length != 0){
                         tempImages.forEach(function(image) {
                             $( ".container" ).prepend("<a class='image' href='"+image.src+"' style='width:"+image.width+"px; height:"+image.height+"px' ><img src='"+image.src+"' width='"+image.width+"' height='"+image.height+"' /></a>");
                         });
                     }
                 }
-                console.log("json");
-                console.log(obj.images);
-                console.log("local");
-                console.log(images);
-                console.log("ARRAYDIFF");
-
-
-
-                //console.log(arr_diff(images,obj.images))
-                console.log(compareJSON(images,obj.images))
-
-
-
+                //console.log("json");
+                //console.log(obj.images);
+                //console.log("local");
+                //console.log(images);
+                //console.log("ARRAYDIFF");
+                //console.log(compareJSON(images,obj.images))
             },
             error: function(error) {
                 console.log(error);
@@ -103,36 +90,6 @@ $(document).ready(function() {
     }
     requestNewImages();
     setInterval(function(){ requestNewImages(); }, 1000);
-
-    function arr_diff (a1, a2) {
-
-        var a = [], diff = [];
-
-        for (var i = 0; i < a1.length; i++) {
-            a[a1[i]] = true;
-        }
-
-        for (var i = 0; i < a2.length; i++) {
-            if (a[a2[i]]) {
-                delete a[a2[i]];
-            } else {
-                a[a2[i]] = true;
-            }
-        }
-
-        for (var k in a) {
-            diff.push(k);
-        }
-
-        return diff;
-    }
-
-    function areDifferentByProperty(a, b, prop) {
-        var idsA = a.map( function(x){ return x[prop]; } ).unique();
-        var idsB = b.map( function(x){ return x[prop]; } ).unique();
-        var idsAB = a.concat(b).unique();
-        return idsAB.length!==idsA.length
-    }
 
     function compareJSON(obj1, obj2) {
         var ret = [];
@@ -260,5 +217,6 @@ if __name__ == '__main__':
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
+        app.stop()
 
     observer.join()
