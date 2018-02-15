@@ -50,29 +50,99 @@ img {
     <script>
 $(document).ready(function() {
     console.log("Request new images");
+
+    var images = []
+
     function requestNewImages(){
 
         $.ajax({
-          url: '/reloadImg',
-          type: 'POST',
-          success: function(response) {
-              console.log("Received : "+response);
+            url: '/reloadImgs',
+            type: 'POST',
+            success: function(response) {
+                console.log("Received : "+response);
 
-              obj = JSON.parse(response);
-              console.log(obj.images);
-              obj.images.forEach(function(image) {
-                $( ".container" ).prepend("<a class='image' href='"+image.src+"' style='width:"+image.width+"px; height:"+image.height+"px' ><img src='"+image.src+"' width='"+image.width+"' height='"+image.height+"' /></a>");
 
-              });
-              },
-          error: function(error) {
-              console.log(error);
-          }
+
+                //console.log(arr_diff(['a', 'b'], ['a', 'b', 'c', 'd']));
+
+                obj = JSON.parse(response);
+
+                if(images.length == 0){
+                    images = obj.images;
+                    obj.images.forEach(function(image) {
+                        $( ".container" ).prepend("<a class='image' href='"+image.src+"' style='width:"+image.width+"px; height:"+image.height+"px' ><img src='"+image.src+"' width='"+image.width+"' height='"+image.height+"' /></a>");
+                    });
+
+                }else{
+                    var tempImages = compareJSON(images,obj.images);
+                    console.log(tempImages);
+                    if(tempImages.length != 0){
+                        tempImages.forEach(function(image) {
+                            $( ".container" ).prepend("<a class='image' href='"+image.src+"' style='width:"+image.width+"px; height:"+image.height+"px' ><img src='"+image.src+"' width='"+image.width+"' height='"+image.height+"' /></a>");
+                        });
+                    }
+                }
+                console.log("json");
+                console.log(obj.images);
+                console.log("local");
+                console.log(images);
+                console.log("ARRAYDIFF");
+
+
+
+                //console.log(arr_diff(images,obj.images))
+                console.log(compareJSON(images,obj.images))
+
+
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
     }
-    setInterval(function(){ requestNewImages(); }, 3000);
+    requestNewImages();
+    setInterval(function(){ requestNewImages(); }, 1000);
 
+    function arr_diff (a1, a2) {
 
+        var a = [], diff = [];
+
+        for (var i = 0; i < a1.length; i++) {
+            a[a1[i]] = true;
+        }
+
+        for (var i = 0; i < a2.length; i++) {
+            if (a[a2[i]]) {
+                delete a[a2[i]];
+            } else {
+                a[a2[i]] = true;
+            }
+        }
+
+        for (var k in a) {
+            diff.push(k);
+        }
+
+        return diff;
+    }
+
+    function areDifferentByProperty(a, b, prop) {
+        var idsA = a.map( function(x){ return x[prop]; } ).unique();
+        var idsB = b.map( function(x){ return x[prop]; } ).unique();
+        var idsAB = a.concat(b).unique();
+        return idsAB.length!==idsA.length
+    }
+
+    function compareJSON(obj1, obj2) {
+        var ret = [];
+        for(var i in obj2) {
+            if(!obj1.hasOwnProperty(i) || obj2[i].src !== obj1[i].src) {
+                ret.push(obj2[i]);
+            }
+        }
+        return ret;
+    }
 
 });
     </script>
@@ -80,13 +150,7 @@ $(document).ready(function() {
 <body>
     <div class="container">
      </div>
-    {% for image in images %}
-        <a class="image" href="{{ image.src }}" style="width: {{ image.width }}px; height: {{ image.height }}px">
-            <img src="{{ image.src }}" data-src="{{ image.src }}?w={{ image.width }}&amp;h={{ image.height }}" width="{{ image.width }}" height="{{ image.height }}" />
 
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image.src }}?w={{ image.width }}&amp;h={{ image.height }}" width="{{ image.width }}" height="{{ image.height }}" />-->
-        </a>
-    {% endfor %}
 </body>
 '''
 
@@ -113,8 +177,6 @@ def image(filename):
 
 @app.route('/')
 def index():
-    print("images....")
-
     for root, dirs, files in os.walk('.'):
         for filename in [os.path.join(root, name) for name in files]:
             print("filename  : "+ filename)
@@ -140,18 +202,8 @@ def index():
         'images': images,
     })
 
-@app.route('/reloadImg', methods=['POST'])
-def reloadImg():
-    #print("reload images post")
-    imagesToSend = copy.deepcopy(newImages)
-    newImages[:] = []
-    return json.dumps({"images":imagesToSend});
-
 @app.route('/reloadImgs', methods=['POST'])
 def reloadImgs():
-    #print("reload images post")
-    #imagesToSend = copy.deepcopy(newImages)
-    #newImages[:] = []
     return json.dumps({"images":images});
 
 
@@ -181,7 +233,6 @@ class MyHandler(PatternMatchingEventHandler):
             else:
                 height = min(h, HEIGHT)
                 width = height*aspect
-            #changed = newImages
             images.append({
                 'width': int(width),
                 'height': int(height),
@@ -193,13 +244,11 @@ class MyHandler(PatternMatchingEventHandler):
 
     def on_created(self, event):
         self.process(event)
-        print("reloaded!")
 
 
 
 
 if __name__ == '__main__':
-    print("hello")
     args = sys.argv[1:]
     observer = Observer()
     observer.schedule(MyHandler(), path=args[0] if args else '.')
