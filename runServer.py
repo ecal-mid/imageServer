@@ -90,7 +90,7 @@ $(document).ready(function() {
         });
     }
     requestNewImages();
-    //setInterval(function(){ requestNewImages(); }, 1000);
+    setInterval(function(){ requestNewImages(); }, 1000);
 
     function compareJSON(obj1, obj2) {
         var ret = [];
