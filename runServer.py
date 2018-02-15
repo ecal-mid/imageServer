@@ -12,6 +12,7 @@ import copy
 
 
 
+
 app = Flask(__name__)
 
 images = []
@@ -202,7 +203,16 @@ class MyHandler(PatternMatchingEventHandler):
     def on_created(self, event):
         self.process(event)
 
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    return 'Server shutting down...'
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
 
 
 if __name__ == '__main__':
@@ -217,6 +227,6 @@ if __name__ == '__main__':
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
-        app.stop()
+        #app.stop()
 
     observer.join()
