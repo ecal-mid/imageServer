@@ -138,8 +138,8 @@ def index():
     for root, dirs, files in os.walk('.'):
         for filename in [os.path.join(root, name) for name in files]:
             print("filename  : "+ filename)
-            if not filename.endswith('.jpg') and filename.startswith('img_'):
-                continue
+            if not filename.endswith('.jpg') and not filename.startswith('img_'):
+                    continue
             im = Image.open(filename)
             w, h = im.size
             aspect = 1.0*w/h
