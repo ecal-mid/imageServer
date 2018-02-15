@@ -1,7 +1,7 @@
 # imageServer
 
-# Start Server
+Start Server
 python runServer.py
 
-# Shutdown Server
+Shutdown Server
 curl -d "" -X POST http://localhost:5000/shutdown
