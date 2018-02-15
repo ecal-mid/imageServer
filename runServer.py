@@ -90,7 +90,7 @@ $(document).ready(function() {
         });
     }
     requestNewImages();
-    setInterval(function(){ requestNewImages(); }, 1000);
+    //setInterval(function(){ requestNewImages(); }, 1000);
 
     function compareJSON(obj1, obj2) {
         var ret = [];
@@ -138,7 +138,7 @@ def index():
     for root, dirs, files in os.walk('.'):
         for filename in [os.path.join(root, name) for name in files]:
             print("filename  : "+ filename)
-            if filename.endswith('.jpg') and filename.find('img_') != -1:
+            if filename.endswith('.jpg') and filename.find("img_") != -1:
                 im = Image.open(filename)
                 w, h = im.size
                 aspect = 1.0*w/h
@@ -180,7 +180,7 @@ class MyHandler(PatternMatchingEventHandler):
         print event.src_path, event.event_type  # print now only for degug
         print("filename = "+event.src_path)
         filename = event.src_path
-        if filename.endswith('.jpg') and filename.find('img_') != -1:
+        if filename.endswith('.jpg') and filename.find("img_") != -1:
             im = Image.open(filename)
             w, h = im.size
             aspect = 1.0*w/h
