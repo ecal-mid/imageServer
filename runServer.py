@@ -138,22 +138,21 @@ def index():
     for root, dirs, files in os.walk('.'):
         for filename in [os.path.join(root, name) for name in files]:
             print("filename  : "+ filename)
-            if not filename.endswith('.jpg') and not filename.startswith('img_'):
-                    continue
-            im = Image.open(filename)
-            w, h = im.size
-            aspect = 1.0*w/h
-            if aspect > 1.0*WIDTH/HEIGHT:
-                width = min(w, WIDTH)
-                height = width/aspect
-            else:
-                height = min(h, HEIGHT)
-                width = height*aspect
-            images.append({
-                'width': int(width),
-                'height': int(height),
-                'src': filename
-            })
+            if filename.endswith('.jpg') and filename.find('img_') != -1:
+                im = Image.open(filename)
+                w, h = im.size
+                aspect = 1.0*w/h
+                if aspect > 1.0*WIDTH/HEIGHT:
+                    width = min(w, WIDTH)
+                    height = width/aspect
+                else:
+                    height = min(h, HEIGHT)
+                    width = height*aspect
+                images.append({
+                    'width': int(width),
+                    'height': int(height),
+                    'src': filename
+                })
 
 
     return render_template_string(TEMPLATE, **{
@@ -181,7 +180,7 @@ class MyHandler(PatternMatchingEventHandler):
         print event.src_path, event.event_type  # print now only for degug
         print("filename = "+event.src_path)
         filename = event.src_path
-        if filename.endswith('.jpg'):
+        if filename.endswith('.jpg') and filename.find('img_') != -1:
             im = Image.open(filename)
             w, h = im.size
             aspect = 1.0*w/h
