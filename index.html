@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+
+    /* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+    margin: 0;
+    padding:0;
+    background-color: #333;
+    width:100vw;
+    height:100vh;
+    overflow: hidden;
+}
+
+.image {
+    display: block;
+    width:100vw;
+    height:auto;
+    border-image-width: 0;
+    float: left;
+    /*margin: 2em auto;
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);*/
+}
+
+
+.imagew {
+
+    width:100vw;
+    height:auto;
+    float: left;
+    font-size: 0;
+
+}
+
+.imageoverlay {
+
+    width:200vw;
+
+    float: left;
+    font-size: 0;
+
+}
+
+.overlay{
+  position: fixed;
+  width: 100vw;
+  height:100vh;
+
+}
+
+.container{
+ position: absolute;
+ font-size: 0;
+
+ width: 300vw;
+ /*height:200vw;*/
+ /*translate(100vw, 0);*/
+
+ background-color: grey;
+ overflow:hidden;
+
+
+
+}
+
+/*.containerRotation{
+ position: absolute;
+ font-size: 0;
+
+ width: 200vw;
+ height: 200vw;
+ background-color: pink;
+ overflow:hidden;
+
+
+
+}*/
+
+.emotion{
+  display: inline-block;
+  width: 100vw;
+  margin:0;
+  padding:0;
+  font-size: 0;
+
+}
+
+.happy{
+
+  background-color:yellow;
+
+}
+.sad{
+
+  background-color:cyan;
+
+}
+.angry{
+
+  background-color:magenta;
+
+}
+
+
+
+img {
+    display: block;
+}
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js" charset="utf-8"></script>
+    <!--<script src="http://luis-almeida.github.io/unveil/jquery.unveil.min.js" charset="utf-8"></script>-->
+    <script>
+
+    $(function() {
+      console.log( "ready!" );
+      //$( ".container" ).translate('100vw',0);
+
+    /*  $(".container").animateTransform("translate(100vw)", 750, function(){
+  console.log("animation completed after 750ms");
+});*/
+      /*$( ".container" ).animate({ "left": "-100vw" }, 500 );
+      $( ".container" ).animate({ "left": "0" }, 500 );
+      $( ".container" ).animate({ "left": "-200vw" }, 500 );*/
+
+      //angry();
+
+      $( ".overlay" ).animate({
+        "left": "0vw",
+        "top": "-60vw",
+        'transform' : 'rotate(60deg)'
+      }, {
+        duration: 500,
+        complete: function() {
+          console.log("Finished!");
+        }
+      });
+
+      function happy() {
+
+        $( ".container" ).animate({
+          "left": "-100vw"
+        }, {
+          duration: 500,
+          complete: function() {
+            console.log("Finished!");
+          }
+        });
+      }
+      function sad() {
+
+        $( ".container" ).animate({
+          "left": "0"
+        }, {
+          duration: 500,
+          complete: function() {
+            console.log("Finished!");
+          }
+        });
+      }
+      function angry() {
+
+        $( ".container" ).animate({
+          "left": "-200vw"
+        }, {
+          duration: 500,
+          complete: function() {
+            console.log("Finished!");
+          }
+        });
+      }
+
+
+
+
+
+
+
+
+    });
+
+
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="emotion happy">
+        <!--<a class='image' href='img_2018-02-14_11_14_33.jpg' style='width:640px; height:"480"px' ><img src='img_2018-02-14_11_14_33.jpg' width='640' height='480' /></a>-->
+        <!--<a class='image' href='img_2018-02-14_11_14_33.jpg'  ></a>-->
+        <img class='imagew' src='img_2018-02-14_11_14_33.jpg'  />
+      </div>
+      <div class="emotion sad">
+        <!--<a class='image' href='img_2018-02-14_11_15_33.jpg' style='width:640px; height:"480"px' ><img class='imagew' src='img_2018-02-14_11_15_33.jpg' width='640' height='480' /></a>-->
+        <img class='imagew' src='img_2018-02-14_11_15_33.jpg' />
+      </div>
+
+      <div class="emotion angry">
+        <!--<a class='image' href='img_2018-02-14_11_16_33.jpg' style='width:640px; height:"480"px' ><img class='imagew' src='img_2018-02-14_11_16_33.jpg' width='640' height='480' /></a>-->
+        <img class='imagew' src='img_2018-02-14_11_16_33.jpg'  />
+      </div>
+
+     </div>
+     <div class="overlay">
+       <img class='imageoverlay' src='Wheel.png'  />
+
+    </div>
+
+
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
