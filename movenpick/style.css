@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding:0;
+    background-color: #333;
+    width:100vw;
+    height:100vh;
+    overflow: hidden;
+}
+
+.image {
+    display: block;
+    width:100vw;
+    height:auto;
+    border-image-width: 0;
+    float: left;
+    /*margin: 2em auto;
+    background-color: #444;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);*/
+}
+
+
+.imagew {
+
+    width:100vw;
+    height:auto;
+    float: left;
+    font-size: 0;
+
+}
+    /* 120 sad, angry 0, happy -120 */
+
+.imageoverlay {
+    width:200vw;
+    transform: translate(0%, -31%) rotate(120deg);
+    transform-origin: 50% 50%;
+    font-size: 0;
+}
+
+.happy-img {
+  transition: .5s ease-in;
+  transform: translate(0%, -31%) rotate(-120deg);
+}
+
+.sad-img {
+  transition: .5s ease-in;
+  transform: translate(0%, -31%) rotate(120deg);
+}
+
+.angry-img{
+  transition: .5s ease-in;
+  transform: translate(0%, -31%) rotate(0deg);
+}
+
+.overlay{
+  position: fixed;
+  
+  /*width: 100vw;
+  height:100vh;
+
+  transform: translate(1%, -82%) rotate(0deg);
+  transform-origin: 50% 50%;
+  */
+}
+
+.container{
+ position: absolute;
+ font-size: 0;
+
+ width: 300vw;
+ /*height:200vw;*/
+ /*translate(100vw, 0);*/
+
+ background-color: grey;
+ overflow:hidden;
+
+
+
+}
+
+/*.containerRotation{
+ position: absolute;
+ font-size: 0;
+
+ width: 200vw;
+ height: 200vw;
+ background-color: pink;
+ overflow:hidden;
+
+
+
+}*/
+
+.emotion{
+  display: inline-block;
+  width: 100vw;
+  margin:0;
+  padding:0;
+  font-size: 0;
+
+}
+
+.happy{
+
+  background-color:yellow;
+
+}
+.sad{
+
+  background-color:cyan;
+
+}
+.angry{
+
+  background-color:magenta;
+
+}
+
+
+
+img {
+    display: block;
+}
