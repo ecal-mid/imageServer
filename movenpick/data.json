@@ -1,1 +1,2 @@
-{"angry": ["images/angry_test10.jpg", "images/angry_test3.jpg", "images/angry_test2.jpg", "images/test_angry.jpg", "images/angry_test.jpg"], "happy": ["images/happy_test2.jpg"], "sad": []}
+{"angry": ["images/angry_test10.jpg", "images/angry_test3.jpg", "images/angry_test2.jpg", "images/test_angry.jpg", "images/angry_test.jpg"], "happy": ["images/happy_test2.jpg"],
+  "sad": ["images/sad_test.jpg"]}
