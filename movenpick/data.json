@@ -1,2 +1,1 @@
-{"angry": ["images/angry_test10.jpg", "images/angry_test3.jpg", "images/angry_test2.jpg", "images/test_angry.jpg", "images/angry_test.jpg"], "happy": ["images/happy_test2.jpg"],
-  "sad": ["images/sad_test.jpg"]}
+[{"type": "sad", "file": "images/2018-03-03_13-42-50_sad.jpg"}, {"type": "sad", "file": "images/2018-03-03_13-42-40_sad.jpg"}, {"type": "sad", "file": "images/2018-03-03_13-29-24_sad.jpg"}, {"type": "sad", "file": "images/2018-03-03_13-27-15_sad.jpg"}, {"type": "sad", "file": "images/2018-03-03_13-27-10_sad.jpg"}, {"type": "happy", "file": "images/happy_2018-02-28_17-00-32.jpg"}, {"type": "happy", "file": "images/happy_2018-02-27_17-44-04.jpg"}]

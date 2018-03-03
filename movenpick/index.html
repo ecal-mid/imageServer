@@ -7,37 +7,29 @@
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <!-- todo --> 
-    <!-- download jquery dep -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js" charset="utf-8"></script>
 </head>
 <body>
     <div class="container">
-      <div class="emotion happy">
-        <!--<a class='image' href='img_2018-02-14_11_14_33.jpg' style='width:640px; height:"480"px' ><img src='img_2018-02-14_11_14_33.jpg' width='640' height='480' /></a>-->
-        <!--<a class='image' href='img_2018-02-14_11_14_33.jpg'  ></a>-->
-        <img class='imagew' src='images/img_2018-02-14_11_14_33.jpg'  />
-      </div>
-      <div class="emotion sad">
-        <!--<a class='image' href='img_2018-02-14_11_15_33.jpg' style='width:640px; height:"480"px' ><img class='imagew' src='img_2018-02-14_11_15_33.jpg' width='640' height='480' /></a>-->
-        <img class='imagew' src='images/img_2018-02-14_11_15_33.jpg' />
+
+        <div class="emotion happy" id="container_happy">
+        <!-- <img class='imagew' src='images/img_2018-02-14_11_14_33.jpg'  /> -->
       </div>
 
-      <div class="emotion angry">
-        <!--<a class='image' href='img_2018-02-14_11_16_33.jpg' style='width:640px; height:"480"px' ><img class='imagew' src='img_2018-02-14_11_16_33.jpg' width='640' height='480' /></a>-->
-        <img class='imagew' src='images/img_2018-02-14_11_16_33.jpg'  />
+      <div class="emotion sad" id="container_sad">
+      </div>
+
+      <div class="emotion angry" id="container_angry">
       </div>
 
      </div>
+    <!--
      <div class="overlay">
        <img class='imageoverlay' src='images/Wheel.png'  />
     </div>
+-->
 
-
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+<script src="libs/jquery-3.3.1.min.js"></script>
+    <script src="libs/lodash.js"></script>
 <script type="text/javascript" src="main.js"></script>
 
 </body>
