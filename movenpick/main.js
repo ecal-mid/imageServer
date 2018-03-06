@@ -4,8 +4,6 @@
   // Simple version - one new image
   // Todo - complicated version, more images
 
-  console.log( "ready!" );
-
 
 var containers = {
     'happy' : $('#container_happy'),
@@ -26,14 +24,14 @@ var anim_functions = {
   function checkForNewData(){
     $.ajax({
      type: "GET",
-     url: 'data.json',
+     url: 'data.json?t=' + new Date(),
      success: function(response){
          //console.log(response);
          var new_data = response;
          // difference(A, B) - returns values present in A but not present in B
-         console.log(response);
+         //console.log(response);
          var new_images = _.differenceWith(new_data, data, _.isEqual).reverse(); // newest last
-         var removed_images = [];
+         var removed_images = _.differenceWith(data, new_data, _.isEqual);
 
         _.each(removed_images, function(d){
             removeImage(d.file);
@@ -43,7 +41,7 @@ var anim_functions = {
             addImage(d.file, d.type);
         });
 
-        if (new_images.length < -10){
+        if (new_images.length > 0){
             var newest_img_data = new_images[new_images.length - 1];
             switch (newest_img_data.type){
             case 'sad':
@@ -59,7 +57,6 @@ var anim_functions = {
         }
 
          data = new_data;
-         console.log('got here');
          // Remove old stuff
          // Check if new stuff is there
          // If it is add it in - start animation for the last one that is added
@@ -70,14 +67,14 @@ var anim_functions = {
 setInterval(checkForNewData, 1000);
 
 function removeImage(fn){
-    $('#'+fn).remove();
+    $('#'+fn.slice(0, -4).replace('/', '')).remove();
 }
 
 function addImage(fn, type){
     //console.log('Add image')
     // Create new image in jquery
     var img = $('<img />', {
-      id: fn,
+      id: fn.slice(0, -4).replace('/', ''), // remove.jpg
       src: fn,
       class: 'imagew'
     });
@@ -98,7 +95,7 @@ function addImage(fn, type){
     }, {
       duration: 500,
       complete: function() {
-        console.log("Finished!");
+        //console.log("Finished!");
       }
     });
   }
@@ -112,7 +109,7 @@ function addImage(fn, type){
     }, {
       duration: 500,
       complete: function() {
-        console.log("Finished!");
+        //console.log("Finished!");
       }
     });
   }
@@ -126,7 +123,7 @@ function addImage(fn, type){
     }, {
       duration: 500,
       complete: function() {
-        console.log("Finished!");
+        //console.log("Finished!");
       }
     });
   }

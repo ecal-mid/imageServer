@@ -13,6 +13,7 @@ data_file = 'data.json'
 
 emotions = ['angry', 'sad', 'happy']
 
+
 def get_mudac_type(fn):
     for e in emotions:
         if e in fn:
@@ -26,19 +27,15 @@ class MyHandler(FileSystemEventHandler):
     def on_any_event(event):
         global emotions
         global limit
+
         print('Files have changed ...')
-        print(images_path)
+
         files = glob.glob(images_path + "/*.jpg")
-        print(files)
         files.sort(key=os.path.getmtime, reverse=True)
-        print("changed files are")
-        print(files)
 
         files = [f[2:] for f in files]
 
-        # map types
         data = [{'file': f, 'type': get_mudac_type(f)} for f in files]
-        # todo filter length of certain types
         limited_data = []
         counts = [0, 0, 0]
         emotion_counts = dict(zip(emotions, counts))
@@ -47,13 +44,9 @@ class MyHandler(FileSystemEventHandler):
                 limited_data.append(d)
                 emotion_counts[d['type']] += 1
 
-        #data = dict()
-        #data['angry'] = [f for f in files if 'angry' in f][:limit]
-        #data['sad'] = [f for f in files if 'sad' in f][:limit]
-        #data['happy'] = [f for f in files if 'happy' in f][:limit]
-
         with open('data.json', 'w') as outfile:
             json.dump(limited_data, outfile)
+
 
 if __name__ == '__main__':
     args = sys.argv[1:]

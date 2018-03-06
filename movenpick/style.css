@@ -66,17 +66,12 @@ body {
  position: absolute;
  font-size: 0;
 
-
- /* width: 300vw;*/
-
-
- /*height:200vw;*/
+ width: 301vw;
+ height:1000vh;
  /*translate(100vw, 0);*/
 
  background-color: grey;
- overflow:hidden;
-
-
+/* overflow:hidden;*/
 
 }
 
@@ -100,25 +95,21 @@ body {
   padding:0;
   font-size: 0;
   overflow: hidden;
+  float: left;
+  height: 100vh;
 }
 
 .happy{
-
-  background-color:yellow;
-
+  background-color:blue;
 }
+
 .sad{
-
-  background-color:cyan;
-
+  background-color:black;
 }
+
 .angry{
-
-  background-color:magenta;
-
+  background-color:red;
 }
-
-
 
 img {
     display: block;
