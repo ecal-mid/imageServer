@@ -33,7 +33,7 @@ class MyHandler(FileSystemEventHandler):
         files = glob.glob(images_path + "/*.jpg")
         files.sort(key=os.path.getmtime, reverse=True)
 
-        files = [f[2:] for f in files]
+        #files = [f[2:] for f in files]
 
         data = [{'file': f, 'type': get_mudac_type(f)} for f in files]
         limited_data = []
