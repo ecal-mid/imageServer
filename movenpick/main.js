@@ -3,6 +3,20 @@
   // todo keep polling the server for new data and create events
   // Simple version - one new image
   // Todo - complicated version, more images
+document.addEventListener('gesturestart', function (e) {
+    alert("hello");
+    e.preventDefault();
+});
+
+ document.addEventListener('touchmove', function(event) {
+  alert("moved");
+    event = event.originalEvent || event;
+    if(event.scale !== undefined && event.scale !== 1) {
+      event.preventDefault();
+    }
+  }, false);
+
+
 
 
 var containers = {

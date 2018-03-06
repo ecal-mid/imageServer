@@ -7,6 +7,10 @@ body {
     overflow: hidden;
 }
 
+html {
+    -webkit-text-size-adjust: none
+}
+
 .image {
     display: block;
     width:100vw;
